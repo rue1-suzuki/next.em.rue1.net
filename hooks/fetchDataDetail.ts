@@ -1,10 +1,13 @@
 import { ResourceNameEnum } from "./enums"
 import fetcher from "./fetcher"
 
-export const fetchDataDetail = async (resourceName: ResourceNameEnum, resourceUuid: string, query?: Record<string, any>,) => {
+export const fetchDataDetail = async (
+  resourceName: ResourceNameEnum,
+  resourceUuid: string,
+) => {
   const path = `/${resourceName}/${resourceUuid}`
 
-  const res = await fetcher(path, query || {})
+  const res = await fetcher(path)
   if (res.ok === false) {
     throw new Error(`Failed to fetch ${path}: ${res.statusText}`)
   }
