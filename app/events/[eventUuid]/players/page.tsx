@@ -1,8 +1,9 @@
-import EventLayout from "@/components/EventLayout"
 import { fetchEventDetail } from "@/hooks/fetchDataDetail"
 import { Metadata } from "next"
 
-export const metadata: Metadata = {}
+export const metadata: Metadata = {
+  title: "参加者一覧",
+}
 
 interface EventPlayerPageProps {
   params: {
@@ -19,9 +20,7 @@ const EventPlayerPage = async (props: EventPlayerPageProps) => {
     ])
 
     return (
-      <EventLayout event={event} metadata={metadata}>
-        Not yet implemented.
-      </EventLayout>
+      <p> Not yet implemented. </p>
     )
   }
   catch (error) {

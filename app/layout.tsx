@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
 import "./globals.css"
@@ -8,7 +9,21 @@ interface RootLayoutProps {
   children: ReactNode
 }
 
-const RootLayout = (props: RootLayoutProps) => {
+export const metadata: Metadata = {
+  title: "EM -EventManager-",
+  twitter: {
+    title: "EM -EventManager-",
+  },
+  openGraph: {
+    title: "EM -EventManager-",
+  },
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
+
+const RootLayout = async (props: RootLayoutProps) => {
   const { children } = props
 
   return (
