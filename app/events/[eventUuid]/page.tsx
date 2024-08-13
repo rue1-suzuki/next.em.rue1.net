@@ -1,7 +1,7 @@
+import EventLayout from "@/components/EventLayout"
 import LinkList from "@/components/LinkList"
 import { fetchResultAll, fetchRoundAll } from "@/hooks/fetchDataAll"
 import { fetchEventDetail } from "@/hooks/fetchDataDetail"
-import EventLayout from "../../../components/EventLayout"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {}

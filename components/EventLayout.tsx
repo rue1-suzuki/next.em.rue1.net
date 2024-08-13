@@ -17,6 +17,10 @@ const EventLayout = async (props: EventLayoutProps) => {
     title: metadata.title,
     description: metadata.description || undefined,
   }
+  metadata.robots = {
+    index: false,
+    follow: false,
+  }
 
   return (
     <>
