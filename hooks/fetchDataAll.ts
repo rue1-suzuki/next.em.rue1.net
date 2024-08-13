@@ -1,9 +1,10 @@
-import { cache } from "react"
 import { ResourceNameEnum } from "./enums"
 import fetcher from "./fetcher"
 
 interface AvailableQuery {
   event?: string
+  round?: string
+  player?: string
 }
 
 export const fetchDataAll = async (resourceName: ResourceNameEnum, query?: AvailableQuery,) => {
@@ -17,9 +18,9 @@ export const fetchDataAll = async (resourceName: ResourceNameEnum, query?: Avail
   return await res.json()
 }
 
-export const fetchEventAll = cache(async (query?: AvailableQuery): Promise<EMEvent[]> => {
+export const fetchEventAll = async (query?: AvailableQuery): Promise<EMEvent[]> => {
   return await fetchDataAll(ResourceNameEnum.EVENTS, query)
-})
+}
 
 export const fetchPlayerAll = async (query?: AvailableQuery): Promise<EMPlayer[]> => {
   return await fetchDataAll(ResourceNameEnum.PLAYERS, query)
