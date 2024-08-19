@@ -1,16 +1,15 @@
 import { ResourceNameEnum } from "./enums"
-import fetcher from "./fetcher"
+import fetcher, { AvailableQuery } from "./fetcher"
 
-interface AvailableQuery {
-  event?: string
-  round?: string
-  player?: string
-}
+const fetchDataAll = async (
+  resourceName: ResourceNameEnum,
+  query: AvailableQuery,
+  revalidate: number,
+) => {
+  const path = `/${resourceName}/`
 
-export const fetchDataAll = async (resourceName: ResourceNameEnum, query?: AvailableQuery,) => {
-  const path = `/${resourceName}`
-
-  const res = await fetcher(path, query || {})
+  console.log("fetch %s", resourceName)
+  const res = await fetcher(path, query, revalidate)
   if (res.ok === false) {
     throw new Error(`Failed to fetch ${path}: ${res.statusText}`)
   }
@@ -18,22 +17,24 @@ export const fetchDataAll = async (resourceName: ResourceNameEnum, query?: Avail
   return await res.json()
 }
 
-export const fetchEventAll = async (query?: AvailableQuery): Promise<EMEvent[]> => {
-  return await fetchDataAll(ResourceNameEnum.EVENTS, query)
+const defaultRevalidate = 10
+
+export const fetchEventAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMEvent[]> => {
+  return await fetchDataAll(ResourceNameEnum.EVENTS, query, revalidate)
 }
 
-export const fetchPlayerAll = async (query?: AvailableQuery): Promise<EMPlayer[]> => {
-  return await fetchDataAll(ResourceNameEnum.PLAYERS, query)
+export const fetchPlayerAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMPlayer[]> => {
+  return await fetchDataAll(ResourceNameEnum.PLAYERS, query, revalidate)
 }
 
-export const fetchRoundAll = async (query?: AvailableQuery): Promise<EMRound[]> => {
-  return await fetchDataAll(ResourceNameEnum.ROUNDS, query)
+export const fetchRoundAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMRound[]> => {
+  return await fetchDataAll(ResourceNameEnum.ROUNDS, query, revalidate)
 }
 
-export const fetchWinnerAll = async (query?: AvailableQuery): Promise<EMWinner[]> => {
-  return await fetchDataAll(ResourceNameEnum.WINNERS, query)
+export const fetchWinnerAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMWinner[]> => {
+  return await fetchDataAll(ResourceNameEnum.WINNERS, query, revalidate)
 }
 
-export const fetchResultAll = async (query?: AvailableQuery): Promise<EMResult[]> => {
-  return await fetchDataAll(ResourceNameEnum.RESULTS, query)
+export const fetchResultAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMResult[]> => {
+  return await fetchDataAll(ResourceNameEnum.RESULTS, query, revalidate)
 }

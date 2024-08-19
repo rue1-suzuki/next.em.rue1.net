@@ -1,9 +1,12 @@
 import { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Noto_Sans_JP } from 'next/font/google'
 import { ReactNode } from "react"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  variable: '--font-noto-sans-jp',
+})
 
 interface RootLayoutProps {
   children: ReactNode
@@ -28,7 +31,7 @@ const RootLayout = async (props: RootLayoutProps) => {
 
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={notoSansJP.className}>
         {children}
       </body>
     </html>

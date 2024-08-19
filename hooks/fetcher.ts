@@ -1,16 +1,22 @@
-const fetcher = (path: string, query?: Record<string, any>,) => {
+export interface AvailableQuery {
+  event?: string
+}
+
+const fetcher = (
+  path: string,
+  query: AvailableQuery,
+  revalidate: number,
+) => {
   if (process.env.NEXT_API_ORIGIN === undefined) {
     throw new Error('NEXT_API_ORIGIN is not defined')
   }
 
   const url = new URL(path, process.env.NEXT_API_ORIGIN)
-  query && Object.keys(query).forEach((key) => {
-    url.searchParams.append(key, query[key])
-  })
+  query.event && url.searchParams.append("event", query.event)
 
   return fetch(url, {
     next: {
-      revalidate: 60,
+      revalidate: revalidate,
     }
   })
 }

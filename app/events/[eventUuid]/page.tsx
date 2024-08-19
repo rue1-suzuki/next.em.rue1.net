@@ -1,6 +1,5 @@
-import LinkList from "@/components/LinkList"
-import { fetchResultAll, fetchRoundAll } from "@/hooks/fetchDataAll"
 import { fetchEventDetail } from "@/hooks/fetchDataDetail"
+import EventData from "./EventData"
 
 interface EventPageProps {
   params: {
@@ -14,58 +13,11 @@ const EventPage = async (props: EventPageProps) => {
   try {
     const event = await fetchEventDetail(params.eventUuid)
 
-    if (event.is_active === null) {
-      return (
-        <p> イベント準備中です。 </p>
-      )
-    }
-
-    if (event.is_active === true) {
-      return (
-        <LinkList
-          items={[
-            {
-              href: `/events/${event.uuid}/players`,
-              children: <> 参加者一覧 </>,
-            },
-            {
-              href: `/events/${event.uuid}/decks`,
-              children: <> デッキ登録 </>,
-            },
-          ]}
-        />
-      )
-    }
-
-    if (event.is_active === false) {
-      const [rounds, results,] = await Promise.all([
-        fetchRoundAll({ event: params.eventUuid }),
-        fetchResultAll({ event: params.eventUuid }),
-      ])
-
-      return (
-        <LinkList
-          items={[
-            {
-              href: `/events/${event.uuid}/players`,
-              children: <> 参加者一覧 </>,
-            },
-            ...rounds.map((round) => {
-              return {
-                href: `/events/${event.uuid}/rounds/`,
-                children: <> 対戦表/第{round.number}回戦 </>,
-              }
-            }),
-            ...results.map((result) => {
-              return {
-                href: `/events/${event.uuid}/results/`,
-                children: <> 成績表 </>,
-              }
-            }),
-          ]}
-        />
-      )
-    }
+    return (
+      <div className="mb-3">
+        <EventData event={event} />
+      </div>
+    )
   } catch (error) {
     console.error(error)
   }

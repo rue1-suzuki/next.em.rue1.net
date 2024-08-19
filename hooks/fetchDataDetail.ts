@@ -1,13 +1,15 @@
 import { ResourceNameEnum } from "./enums"
 import fetcher from "./fetcher"
 
-export const fetchDataDetail = async (
+const fetchDataDetail = async (
   resourceName: ResourceNameEnum,
   resourceUuid: string,
+  revalidate: number,
 ) => {
-  const path = `/${resourceName}/${resourceUuid}`
+  const path = `/${resourceName}/${resourceUuid}/`
 
-  const res = await fetcher(path)
+  console.log("fetch %s: %s", resourceName, resourceUuid)
+  const res = await fetcher(path, {}, revalidate)
   if (res.ok === false) {
     throw new Error(`Failed to fetch ${path}: ${res.statusText}`)
   }
@@ -15,22 +17,24 @@ export const fetchDataDetail = async (
   return await res.json()
 }
 
-export const fetchEventDetail = async (uuid: string): Promise<EMEvent> => {
-  return await fetchDataDetail(ResourceNameEnum.EVENTS, uuid)
+const defaultRevalidate = 10
+
+export const fetchEventDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMEvent> => {
+  return await fetchDataDetail(ResourceNameEnum.EVENTS, uuid, revalidate)
 }
 
-export const fetchPlayerDetail = async (uuid: string): Promise<EMPlayer> => {
-  return await fetchDataDetail(ResourceNameEnum.PLAYERS, uuid)
+export const fetchPlayerDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMPlayer> => {
+  return await fetchDataDetail(ResourceNameEnum.PLAYERS, uuid, revalidate)
 }
 
-export const fetchRoundDetail = async (uuid: string): Promise<EMRound> => {
-  return await fetchDataDetail(ResourceNameEnum.ROUNDS, uuid)
+export const fetchRoundDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMRound> => {
+  return await fetchDataDetail(ResourceNameEnum.ROUNDS, uuid, revalidate)
 }
 
-export const fetchWinnerDetail = async (uuid: string): Promise<EMWinner> => {
-  return await fetchDataDetail(ResourceNameEnum.WINNERS, uuid)
+export const fetchWinnerDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMWinner> => {
+  return await fetchDataDetail(ResourceNameEnum.WINNERS, uuid, revalidate)
 }
 
-export const fetchResultDetail = async (uuid: string): Promise<EMResult> => {
-  return await fetchDataDetail(ResourceNameEnum.RESULTS, uuid)
+export const fetchResultDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMResult> => {
+  return await fetchDataDetail(ResourceNameEnum.RESULTS, uuid, revalidate)
 }
