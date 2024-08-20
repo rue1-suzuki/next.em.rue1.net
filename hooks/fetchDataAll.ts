@@ -1,5 +1,5 @@
-import { ResourceNameEnum } from "./enums"
-import fetcher, { AvailableQuery } from "./fetcher"
+import fetcher from "./fetcher"
+import { AvailableQuery, defaultRevalidate, ResourceNameEnum } from "./settings"
 
 const fetchDataAll = async (
   resourceName: ResourceNameEnum,
@@ -17,24 +17,37 @@ const fetchDataAll = async (
   return await res.json()
 }
 
-const defaultRevalidate = 10
-
-export const fetchEventAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMEvent[]> => {
+export const fetchEventAll = async (
+  query: AvailableQuery = {},
+  revalidate: number = defaultRevalidate,
+): Promise<EMEvent[]> => {
   return await fetchDataAll(ResourceNameEnum.EVENTS, query, revalidate)
 }
 
-export const fetchPlayerAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMPlayer[]> => {
+export const fetchPlayerAll = async (
+  query: AvailableQuery = {},
+  revalidate: number = defaultRevalidate,
+): Promise<EMPlayer[]> => {
   return await fetchDataAll(ResourceNameEnum.PLAYERS, query, revalidate)
 }
 
-export const fetchRoundAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMRound[]> => {
+export const fetchRoundAll = async (
+  query: AvailableQuery = {},
+  revalidate: number = defaultRevalidate,
+): Promise<EMRound[]> => {
   return await fetchDataAll(ResourceNameEnum.ROUNDS, query, revalidate)
 }
 
-export const fetchWinnerAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMWinner[]> => {
+export const fetchWinnerAll = async (
+  query: AvailableQuery = {},
+  revalidate: number = defaultRevalidate,
+): Promise<EMWinner[]> => {
   return await fetchDataAll(ResourceNameEnum.WINNERS, query, revalidate)
 }
 
-export const fetchResultAll = async (query: AvailableQuery = {}, revalidate: number = defaultRevalidate,): Promise<EMResult[]> => {
+export const fetchResultAll = async (
+  query: AvailableQuery = {},
+  revalidate: number = defaultRevalidate,
+): Promise<EMResult[]> => {
   return await fetchDataAll(ResourceNameEnum.RESULTS, query, revalidate)
 }

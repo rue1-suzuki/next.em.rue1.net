@@ -1,5 +1,5 @@
-import { ResourceNameEnum } from "./enums"
 import fetcher from "./fetcher"
+import { defaultRevalidate, ResourceNameEnum } from "./settings"
 
 const fetchDataDetail = async (
   resourceName: ResourceNameEnum,
@@ -17,24 +17,37 @@ const fetchDataDetail = async (
   return await res.json()
 }
 
-const defaultRevalidate = 10
-
-export const fetchEventDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMEvent> => {
+export const fetchEventDetail = async (
+  uuid: string,
+  revalidate = defaultRevalidate,
+): Promise<EMEvent> => {
   return await fetchDataDetail(ResourceNameEnum.EVENTS, uuid, revalidate)
 }
 
-export const fetchPlayerDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMPlayer> => {
+export const fetchPlayerDetail = async (
+  uuid: string,
+  revalidate = defaultRevalidate,
+): Promise<EMPlayer> => {
   return await fetchDataDetail(ResourceNameEnum.PLAYERS, uuid, revalidate)
 }
 
-export const fetchRoundDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMRound> => {
+export const fetchRoundDetail = async (
+  uuid: string,
+  revalidate = defaultRevalidate,
+): Promise<EMRound> => {
   return await fetchDataDetail(ResourceNameEnum.ROUNDS, uuid, revalidate)
 }
 
-export const fetchWinnerDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMWinner> => {
+export const fetchWinnerDetail = async (
+  uuid: string,
+  revalidate = defaultRevalidate,
+): Promise<EMWinner> => {
   return await fetchDataDetail(ResourceNameEnum.WINNERS, uuid, revalidate)
 }
 
-export const fetchResultDetail = async (uuid: string, revalidate = defaultRevalidate,): Promise<EMResult> => {
+export const fetchResultDetail = async (
+  uuid: string,
+  revalidate = defaultRevalidate,
+): Promise<EMResult> => {
   return await fetchDataDetail(ResourceNameEnum.RESULTS, uuid, revalidate)
 }

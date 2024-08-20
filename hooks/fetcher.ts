@@ -1,6 +1,4 @@
-export interface AvailableQuery {
-  event?: string
-}
+import { AvailableQuery } from "./settings"
 
 const fetcher = (
   path: string,
