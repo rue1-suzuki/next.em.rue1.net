@@ -1,5 +1,7 @@
-import { fetchEventDetail } from "@/hooks/fetchDataDetail"
+import { H2 } from "@/components/MyHeaders"
+import { fetchPlayerAll } from "@/fetchs/fetchDataAll"
 import { Metadata } from "next"
+import ReportForm from "./ReportForm"
 
 export const metadata: Metadata = {
   title: "通報",
@@ -15,25 +17,33 @@ const EventReportPage = async (props: EventReportPageProps) => {
   const { params } = props
 
   try {
-    const [event] = await Promise.all([
-      fetchEventDetail(params.eventUuid),
+    const [players] = await Promise.all([
+      fetchPlayerAll({ event: params.eventUuid }),
     ])
 
     return (
-      <p> Not yet implemented. </p>
+      <>
+        <div className="mb-3">
+          <H2> 通報フォーム </H2>
+        </div>
+
+        <div className="mb-3">
+          <ReportForm players={players} />
+        </div>
+      </>
     )
   }
   catch (error) {
     console.error(error)
     return (
-      <main className="text-center py-3">
+      <div className="mb-3">
         <p className="text-red-500 font-bold">
           データの取得に失敗しました
         </p>
         <p className="text-red-500 font-bold">
           event: {params.eventUuid}
         </p>
-      </main>
+      </div>
     )
   }
 }

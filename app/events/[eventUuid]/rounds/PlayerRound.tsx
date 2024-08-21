@@ -29,7 +29,12 @@ const PlayerRound = (props: PlayerRoundProps) => {
     )
   }
 
-  const winner = winners.find((winner) => winner.round === round.uuid && winner.player === player.uuid)
+  const currentPlayerWinner = winners.find((winner) => {
+    if (winner.round === round.uuid)
+      if (winner.player === player.uuid)
+        return true
+    return false
+  })
 
   if (playerMatch.table === null) {
     return (
@@ -46,11 +51,11 @@ const PlayerRound = (props: PlayerRoundProps) => {
           <p className="text-sm font-bold"> 対戦相手 </p>
           <p className="text-2xl font-bold"> 不戦勝 </p>
         </div>
-        {winner &&
+        {currentPlayerWinner &&
           <div className="mb-1">
             <p className="text-sm font-bold"> 対戦結果 </p>
             <p className="text-2xl font-bold">
-              {winner.is_win ? <> あなたの勝ち </> : <> あなたの負け </>}
+              {currentPlayerWinner.is_win ? <> あなたの勝ち </> : <> あなたの負け </>}
             </p>
           </div>
         }
@@ -67,20 +72,14 @@ const PlayerRound = (props: PlayerRoundProps) => {
   }).map((opponentMatch) => players.filter((player) => player.uuid === opponentMatch.player)).flat()
 
   return (
-    <div className={winner ? winner.is_win ? "text-blue-500" : "text-red-500" : undefined}>
+    <div className={currentPlayerWinner ? currentPlayerWinner.is_win ? "text-blue-500" : "text-red-500" : undefined}>
       <div className="mb-1">
-        <p className="text-sm"> 対戦 </p>
+        <p className="text-sm"> 回戦 </p>
         <p className="text-2xl font-bold"> 第{round.number}回戦 </p>
       </div>
       <div className="mb-1">
         <p className="text-sm"> 対戦卓 </p>
         <p className="text-2xl font-bold"> 第{playerMatch.table}卓 </p>
-      </div>
-      <div className="mb-1">
-        <p className="text-sm"> 対戦者 </p>
-        <p className="text-2xl font-bold">
-          {player.name}
-        </p>
       </div>
       <div className="mb-1">
         <p className="text-sm"> 対戦相手 </p>
@@ -94,16 +93,16 @@ const PlayerRound = (props: PlayerRoundProps) => {
       </div>
       <div className="mb-1">
         <p className="text-sm"> 対戦結果 </p>
-        {winner === undefined &&
+        {currentPlayerWinner === undefined &&
           <p className="text-2xl font-bold">
             <a className="text-blue-500 underline" href={`/events/${event.uuid}/winners`}>
               勝利報告
             </a>
           </p>
         }
-        {winner &&
+        {currentPlayerWinner &&
           <p className="text-2xl font-bold">
-            {winner.is_win ? <> あなたの勝ち </> : <> あなたの負け </>}
+            {currentPlayerWinner.is_win ? <> あなたの勝ち </> : <> あなたの負け </>}
           </p>
         }
       </div>

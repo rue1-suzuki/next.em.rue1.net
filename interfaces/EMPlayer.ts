@@ -3,4 +3,5 @@ interface EMPlayer extends EMBase {
   name: string
   is_active: boolean
   external_id: number | null
+  deck: string | null
 }

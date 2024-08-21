@@ -15,7 +15,7 @@ const LinkList = (props: LinkListProps) => {
     <div className="flex flex-col gap-3">
       {items.map((item, index) => {
         return (
-          <div className="bg-gray-100 rounded p-1" key={index}>
+          <div className="flex-auto bg-gray-100 rounded py-1" key={index}>
             <Link className="text-lg text-blue-500 underline" href={item.href}>
               {item.children}
             </Link>

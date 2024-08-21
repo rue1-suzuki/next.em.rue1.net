@@ -1,12 +1,11 @@
-import CheckoutFormClientAction from "./CheckoutFormClientAction"
+import CheckoutFormServerAction from "./CheckoutFormServerAction"
+import CheckoutFormSubmitButton from "./CheckoutFormSubmitButton"
 
 const CheckoutForm = () => {
   return (
-    <form className="flex flex-col gap-1" action={CheckoutFormClientAction}>
+    <form className="flex flex-col gap-1" action={CheckoutFormServerAction}>
       <div className="flex-auto">
-        <button className="bg-gray-500 rounded px-4 py-2 text-lg font-bold text-white" type="submit">
-          チェックアウト
-        </button>
+        <CheckoutFormSubmitButton />
       </div>
     </form>
   )

@@ -1,9 +1,7 @@
 "use server"
-import { fetchRoundDetail } from "@/hooks/fetchDataDetail"
-import { refreshWinners } from "@/utils/refreshWinners"
-import { redirect } from "next/navigation"
+import { fetchRoundDetail } from "@/fetchs/fetchDataDetail"
 
-const winnerReportFormAction = async (formData: FormData) => {
+const winnerReportFormServerAction = async (formData: FormData) => {
   if (process.env.NEXT_API_ORIGIN === undefined) {
     throw new Error('NEXT_API_ORIGIN is not defined')
   }
@@ -32,7 +30,7 @@ const winnerReportFormAction = async (formData: FormData) => {
 
   const winnerReportUrl = new URL("/bulk/winners/", process.env.NEXT_API_ORIGIN)
 
-  const res = await fetch(winnerReportUrl, {
+  const response = await fetch(winnerReportUrl, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -54,15 +52,6 @@ const winnerReportFormAction = async (formData: FormData) => {
       })
     ]),
   })
-
-  // winnersをリフレッシュ
-  const eventUuid = formData.get("eventUuid")?.toString()
-  if (eventUuid) {
-    await refreshWinners(eventUuid)
-    if (res.ok) {
-      redirect(`/events/${eventUuid}/rounds`)
-    }
-  }
 }
 
-export default winnerReportFormAction
+export default winnerReportFormServerAction

@@ -49,13 +49,13 @@ const EventData = (props: EventDataProps) => {
     items.push({
       title: <> 関連リンク </>,
       contents: [
-        <a className="text-blue-500 underline" href={event.link}>
+        <a className="text-blue-500 underline" href={event.link} key={event.link}>
           関連リンク その1
         </a>,
-        <a className="text-blue-500 underline" href={event.link}>
+        <a className="text-blue-500 underline" href={event.link} key={event.link}>
           関連リンク その2
         </a>,
-        <a className="text-blue-500 underline" href={event.link}>
+        <a className="text-blue-500 underline" href={event.link} key={event.link}>
           関連リンク その3
         </a>,
       ]

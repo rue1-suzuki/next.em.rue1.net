@@ -1,4 +1,4 @@
-import { fetchEventDetail } from "@/hooks/fetchDataDetail"
+import { fetchEventDetail } from "@/fetchs/fetchDataDetail"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -26,14 +26,14 @@ const EventNoticePage = async (props: EventNoticePageProps) => {
   catch (error) {
     console.error(error)
     return (
-      <main className="text-center py-3">
+      <div className="mb-3">
         <p className="text-red-500 font-bold">
           データの取得に失敗しました
         </p>
         <p className="text-red-500 font-bold">
           event: {params.eventUuid}
         </p>
-      </main>
+      </div>
     )
   }
 }

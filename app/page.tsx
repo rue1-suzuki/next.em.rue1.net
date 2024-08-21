@@ -1,5 +1,6 @@
 import LinkList from "@/components/LinkList"
-import { fetchEventAll } from "@/hooks/fetchDataAll"
+import { H1 } from "@/components/MyHeaders"
+import { fetchEventAll } from "@/fetchs/fetchDataAll"
 import Link from "next/link"
 
 const HomePage = async () => {
@@ -17,16 +18,16 @@ const HomePage = async () => {
       <>
         <header>
           <div className="bg-black py-2 text-center">
-            <h1 className="text-lg font-bold text-white truncate">
-              <Link href="/">
-                EM -EventManager-
-              </Link>
-            </h1>
+            <Link className="text-white truncate" href="/">
+              <H1> EM -EventManager- </H1>
+            </Link>
           </div>
         </header>
+
         <main className="text-center py-3" style={{ minHeight: "100vh" }}>
           <LinkList items={linkItems} />
         </main>
+
         <footer>
           <div className="bg-gray-500 py-2 text-center">
             <p className="text-sm font-bold text-white">

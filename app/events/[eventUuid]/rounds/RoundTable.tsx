@@ -24,10 +24,10 @@ const RoundTable = (props: RoundTableProps) => {
             <tr className={`border-y ${winner ? winner.is_win ? "text-blue-500" : "text-red-500" : "text-gray-500"}`} key={match.player}>
               <td className="px-4 py-2"> {match.table ? <> 第{match.table}卓 </> : <> 不戦勝 </>} </td>
               <td className="px-4 py-2">
-                <p> {player ? player.name : <> 不明なプレイヤー </>} </p>
+                <p> {player ? player.name : <>  </>} </p>
                 <p className="text-xs"> {match.current_win}勝 </p>
               </td>
-              <td className="px-4 py-2"> {winner ? winner.is_win ? <> 勝ち </> : <> 負け </> : <> 対戦中 </>} </td>
+              <td className="px-4 py-2"> {winner ? winner.is_win ? <> WIN </> : <> LOSE </> : <> 対戦中 </>} </td>
             </tr>
           )
         })}

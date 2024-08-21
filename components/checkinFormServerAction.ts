@@ -1,5 +1,5 @@
 "use server"
-import { fetchPlayerAll } from "@/hooks/fetchDataAll"
+import { fetchPlayerAll } from "@/fetchs/fetchDataAll"
 import { AvailableKeys, setCookieValue } from "@/utils/getCookieValue"
 
 const checkinFormServerAction = async (formData: FormData) => {
